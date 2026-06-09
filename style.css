@@ -1,0 +1,322 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    font-family:"Poppins",sans-serif;
+    text-align:center;
+
+    background:#f5f5f5 url("./IMG/bg.png") repeat center top 120px;
+    background-size: 100%;
+}
+
+.container{
+    width:100%;
+    max-width:1200px;
+}
+
+.container h1{
+    font-size:3rem;
+    font-weight:800;
+    color: #5bb254;
+    transition: .5s;
+}
+
+.container p{
+    margin-top:10px;
+    font-size:1.2rem;
+    font-weight:500;
+    transition: .5s;
+}
+
+.strength{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    opacity: 0;
+    display: none;
+    max-height: 0;
+    margin-top: 40px;
+    transition: .5s;
+}
+
+.strength.show{
+    opacity: 1;
+    display: flex;
+    max-height: 100px;
+}
+
+.strength h2{
+    font-size:1.7rem;
+    margin: 0;
+}
+
+.strength #strengthImg{
+    width:30px;
+    height:30px;
+}
+
+.strength #strengthImg img{
+    width:30px;
+}
+
+.strengthDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.passConfig{
+    margin-top:40px;
+    max-width: 1080px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    text-align: center;
+    margin: 40px auto 0;
+    gap:15px;
+}
+
+.inputValue{
+    width:100px;
+    height:70px;
+
+    border:1px solid rgba(128,128,128,.35);
+    border-radius: 8px;
+
+    font-size:24px;
+    font-weight:bold;
+
+    padding:10px;
+    transition: .5s;
+}
+
+.inputValue:focus{
+    border: 1px solid #5bb254;
+    outline: none;
+}
+
+.resultInput{
+    flex:1;
+    background-color: white;
+    height:70px;
+
+    border:none;
+    border-radius: 8px;
+
+    padding:0 20px;
+
+    font-size:24px;
+    font-weight:bold;
+
+    outline:none;
+    caret-color:transparent;
+    transition: .5s;
+}
+
+.generateBtn,
+.copyBtn{
+    height:70px;
+    transition: opacity 0.2s ease;
+    color: #5bb254;
+
+    padding:0 25px;
+
+    border-radius: 8px;
+    border:1px solid rgba(128,128,128,.35);
+
+    background:white;
+
+    font-size:20px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.5s;
+}
+
+.generateBtn:hover,
+.copyBtn:hover{
+    color:#5bb254;
+    border-color:#5bb254;
+}
+
+
+.passSettings{
+    margin-top:50px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+
+    gap:30px;
+    transition: .5s;
+}
+
+.checkboxes{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    
+}
+
+.checkbox{
+    transform:scale(1.8);
+}
+
+.checkboxes label{
+    font-size:1.5rem;
+}
+
+.symbolsInput{
+    width:180px;
+    height:45px;
+
+    padding:0 15px;
+
+    border-radius: 8px;
+    border:1px solid rgba(128,128,128,.35);
+
+    font-size:20px;
+    transition: .5s;
+}
+
+.symbolsInput:focus{
+    border: 1px solid #5bb254;
+    outline: none;
+}
+
+@media (max-width: 900px){
+
+    .container h1{
+        font-size:2.4rem;
+    }
+
+    .container p{
+        font-size:1rem;
+    }
+
+    .passConfig{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .resultInput{
+        flex-basis:100%;
+    }
+}
+
+@media (max-width: 768px){
+
+    body{
+        padding:15px;
+    }
+
+    .container h1{
+        font-size:2rem;
+    }
+
+    .container p{
+        font-size:.95rem;
+    }
+
+    .strength h2{
+        font-size:1.4rem;
+    }
+
+    .passConfig{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .inputValue,
+    .resultInput,
+    .generateBtn,
+    .copyBtn{
+        width:100%;
+    }
+
+    .resultInput{
+        font-size: 18px;
+        padding: 20px 15px;
+    }
+
+    .generateBtn,
+    .copyBtn{
+        height:60px;
+    }
+
+    .checkboxes label{
+        font-size:1.1rem;
+    }
+
+    .checkbox{
+        transform:scale(1.5);
+    }
+
+    .symbolsInput{
+        width:100%;
+        max-width:250px;
+    }
+}
+
+@media (max-width: 480px){
+
+    .container h1{
+        font-size:1.6rem;
+    }
+
+    .container p{
+        font-size:.9rem;
+    }
+
+    .strength{
+        margin-top:25px;
+    }
+
+    .strength h2{
+        font-size:1.4rem;
+    }
+
+    .inputValue{
+        height:60px;
+        font-size:18px;
+    }
+
+    .resultInput{
+        height:60px;
+        font-size:16px;
+    }
+
+    .generateBtn{
+        margin-top: 20px;
+    }
+
+    .generateBtn,
+    .copyBtn{
+        height:55px;
+        font-size:16px;
+    }
+
+    .passSettings{
+        gap:18px;
+    }
+
+    .passConfig{
+        margin-top: 25px;
+    }
+}
