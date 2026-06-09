@@ -21,7 +21,7 @@ A modern and responsive password generator built with **HTML**, **CSS**, and **J
 
 ## 📸 Preview
 
-<p align="center">
+<p align="left">
   <img src="./IMG/screenshot.png" alt="Password Generator Preview" width="300">
 </p>
 
