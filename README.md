@@ -17,7 +17,7 @@ A modern and responsive password generator built with **HTML**, **CSS**, and **J
 
 ## 🚀 Live Demo
 
-👉 **Live Website:** https://your-demo-url.com
+👉 **Live Website:** https://alexkonecny10.github.io/PasswordGenerator-JS/
 
 ## 📸 Preview
 
