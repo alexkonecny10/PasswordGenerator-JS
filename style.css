@@ -1,3 +1,8 @@
+:root{
+    --green-color: #5bb254;
+    --border-radius: 8px;
+}
+
 *{
     margin:0;
     padding:0;
@@ -28,7 +33,7 @@ body{
 .container h1{
     font-size:3rem;
     font-weight:800;
-    color: #5bb254;
+    color: var(--green-color);
     transition: .5s;
 }
 
@@ -95,7 +100,7 @@ body{
     height:70px;
 
     border:1px solid rgba(128,128,128,.35);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
 
     font-size:24px;
     font-weight:bold;
@@ -105,7 +110,7 @@ body{
 }
 
 .inputValue:focus{
-    border: 1px solid #5bb254;
+    border: 1px solid var(--green-color);
     outline: none;
 }
 
@@ -115,7 +120,7 @@ body{
     height:70px;
 
     border:none;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
 
     padding:0 20px;
 
@@ -131,11 +136,11 @@ body{
 .copyBtn{
     height:70px;
     transition: opacity 0.2s ease;
-    color: #5bb254;
+    color: var(--green-color);
 
     padding:0 25px;
 
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     border:1px solid rgba(128,128,128,.35);
 
     background:white;
@@ -150,8 +155,8 @@ body{
 
 .generateBtn:hover,
 .copyBtn:hover{
-    color:#5bb254;
-    border-color:#5bb254;
+    color:var(--green-color);
+    border-color:var(--green-color);
 }
 
 
@@ -171,7 +176,7 @@ body{
     display:flex;
     align-items:center;
     gap:12px;
-    
+
 }
 
 .checkbox{
@@ -188,7 +193,7 @@ body{
 
     padding:0 15px;
 
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     border:1px solid rgba(128,128,128,.35);
 
     font-size:20px;
@@ -196,8 +201,166 @@ body{
 }
 
 .symbolsInput:focus{
-    border: 1px solid #5bb254;
+    border: 1px solid var(--green-color);
     outline: none;
+}
+
+.historyBtn{
+    width: 180px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(128,128,128,.35);
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    transition: .5s;
+    color: var(--green-color);
+    background-color: white;
+}
+
+.historyBtn:hover{
+    border: 1px solid var(--green-color);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+
+.modal-content {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 500px;
+    transition: .5s;
+    animation: modalOpen 0.3s ease;
+}
+
+@keyframes modalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+.niga{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    gap: 15%;
+    width: 100%;
+    transition: .5s;
+}
+
+.modal-content h2{
+    color: var(--green-color);
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    transition: .5s;
+}
+
+.modal-content p{
+    text-align: left;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    transition: .5s;
+    
+}
+
+.modal-content h1{
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+
+
+.modal-content hr{
+    margin-left: -15px;
+    margin-right: -15px;
+    color: rgb(255, 255, 255);
+    transition: .5s;
+}
+
+#historyList{
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 2px;
+    text-align: left;
+    max-height: 500px;
+    overflow-y: auto;
+    transition: .5s;
+}
+
+.historyPass{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 50px;
+    transition: .5s;
+}
+
+.historyPass p{
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.historyPass span{
+    cursor: pointer;
+    margin-left: 30px;
+    transition: .1s;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.historyPass span:hover{
+    background-color: #00000041;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
+    margin-right: 10px;
+    display: flex;
+    width: 20px;
+    flex: 1;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
+    transition: .5s;
 }
 
 @media (max-width: 900px){
@@ -272,6 +435,10 @@ body{
         width:100%;
         max-width:250px;
     }
+
+    .modal-content{
+        width: 400px;
+    }
 }
 
 @media (max-width: 480px){
@@ -319,4 +486,15 @@ body{
     .passConfig{
         margin-top: 25px;
     }
+
+    .modal-content{
+        width: 300px;
+    }
+
+}
+
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  .modal-content{
+    max-height: 300px;
+  }
 }

@@ -20,140 +20,221 @@ const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
 const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numberChars = "0123456789";
 
+// PASSWORD HISTORY MODAL
+const modal = document.getElementById("historyModal");
+const historyList = document.getElementById("historyList");
+const emptyHistory = document.getElementById("emptyHistory")
+let passwordHistory = JSON.parse(localStorage.getItem("passwordHistory")) || [];
+
 window.onload = () => {
-    document.getElementById("passLength").value = "1";
-    document.getElementById("symbolsInput").value = "";
+  document.getElementById("passLength").value = "1";
+  document.getElementById("symbolsInput").value = "";
 
-    lowercaseInput.checked = false;
-    uppercaseInput.checked = false;
-    numbersInput.checked = false;
+  lowercaseInput.checked = false;
+  uppercaseInput.checked = false;
+  numbersInput.checked = false;
 
-    passwordResult.value = "";
+  passwordResult.value = "";
+  renderHistory();
 };
 
 // SHOW PASSSWORD STRENGTH
 function setStrength(text, color, image) {
-    strengthBox.classList.add("show");
+  strengthBox.classList.add("show");
 
-    passwordResult.style.backgroundColor = color;
-    passwordResult.style.color = "white";
+  passwordResult.style.backgroundColor = color;
+  passwordResult.style.color = "white";
 
-    strengthImg.innerHTML = `<img src="${image}">`;
-    strengthText.textContent = text;
+  strengthImg.innerHTML = `<img src="${image}">`;
+  strengthText.textContent = text;
 }
 
 // REMOVE STRENGTH VISIBILITY
 function removeStrengthVisibility() {
-    strengthBox.classList.remove("show");
+  strengthBox.classList.remove("show");
 
-    strengthImg.innerHTML = "";
-    strengthText.textContent = "";
+  strengthImg.innerHTML = "";
+  strengthText.textContent = "";
 
-    passwordResult.style.backgroundColor = "white";
-    passwordResult.style.color = "black";
+  passwordResult.style.backgroundColor = "white";
+  passwordResult.style.color = "black";
 }
 
 // SHOW AN ERROR
 function showError(message) {
-    removeStrengthVisibility();
-    passwordResult.value = message;
+  removeStrengthVisibility();
+  passwordResult.value = message;
 }
 
 // GET SELECTED CHARS FROM USER
 function getAllowedChars() {
-    const chars = [];
-    const symbols = document.getElementById("symbolsInput").value.trim();
+  const chars = [];
+  const symbols = document.getElementById("symbolsInput").value.trim();
 
-    if (lowercaseInput.checked) chars.push(...lowercaseChars);
-    if (uppercaseInput.checked) chars.push(...uppercaseChars);
-    if (numbersInput.checked) chars.push(...numberChars);
+  if (lowercaseInput.checked) chars.push(...lowercaseChars);
+  if (uppercaseInput.checked) chars.push(...uppercaseChars);
+  if (numbersInput.checked) chars.push(...numberChars);
 
-    if (symbols !== "") {
-        chars.push(...symbols);
-    }
+  if (symbols !== "") {
+    chars.push(...symbols);
+  }
 
-    return chars;
+  return chars;
 }
 
 // GENERATE PASSWORD
 function generatePassword(length, allowedChars) {
-    let password = "";
+  let password = "";
 
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * allowedChars.length);
-        password += allowedChars[randomIndex];
-    }
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * allowedChars.length);
+    password += allowedChars[randomIndex];
+  }
 
-    return password;
+  return password;
 }
 
 // CALCULATE ENTROPY FOR PASSWORD STRENGTH
 function calculateEntropy(length, charsetSize) {
-    return length * Math.log2(charsetSize);
+  return length * Math.log2(charsetSize);
 }
 
 // PASSWORD STRENGTH
 function updateStrength(entropy) {
-    if (entropy < 40) {
-        setStrength("Weak", "#ff3f46", "./IMG/weak.png");
+  if (entropy < 40) {
+    setStrength("Weak", "#ff3f46", "./IMG/weak.png");
 
-    } else if (entropy < 60) {
-        setStrength("Medium", "#ff8523", "./IMG/medium.png");
+  } else if (entropy < 60) {
+    setStrength("Medium", "#ff8523", "./IMG/medium.png");
 
-    } else if (entropy < 80) {
-        setStrength("Good", "#99c92a", "./IMG/good.png");
+  } else if (entropy < 80) {
+    setStrength("Good", "#99c92a", "./IMG/good.png");
 
-    } else {
-        setStrength("Strong", "#5bb254", "./IMG/strong.png");
-
-    }
+  } else {
+    setStrength("Strong", "#5bb254", "./IMG/strong.png");
+    
+  }
 }
 
 // SHOW PASSWORD TO USER
 function showPassword() {
+  // disable generate button for a while after click
+  generateBtn.disabled = true;
 
-    // disable generate button for a while after click
-    generateBtn.disabled = true;
+  setTimeout(() => {
+    generateBtn.disabled = false;
+  }, 500);
 
-    setTimeout(() => {
-        generateBtn.disabled = false;
-    }, 500);
+  const lengthValue = document.getElementById("passLength").value;
+  const passwordLength = Number(lengthValue);
 
-    const lengthValue = document.getElementById("passLength").value;
-    const passwordLength = Number(lengthValue);
+  if (lengthValue === "") {
+    showError("Enter a valid password length");
+    return;
+  }
 
-    if (lengthValue === "") {
-        showError("Enter a valid password length");
-        return;
-    }
+  if (passwordLength < 1 || isNaN(passwordLength)) {
+    showError("Password length can't be less than 1");
+    return;
+  }
 
-    if (passwordLength < 1 || isNaN(passwordLength)) {
-        showError("Password length can't be less than 1");
-        return;
-    }
+  const allowedChars = getAllowedChars();
+  if (allowedChars.length === 0) {
+    showError("Select at least one option");
+    return;
+  }
 
-    const allowedChars = getAllowedChars();
-    if (allowedChars.length === 0) {
-        showError("Select at least one option");
-        return;
-    }
+  const password = generatePassword(passwordLength, allowedChars);
+  passwordResult.value = password;
 
-    const password = generatePassword(passwordLength, allowedChars);
-    passwordResult.value = password;
+  const entropy = calculateEntropy(passwordLength, allowedChars.length);
+  updateStrength(entropy);
 
-    const entropy = calculateEntropy(passwordLength, allowedChars.length);
-    updateStrength(entropy);
+
+  // PASSWORD HISTORY
+  showPasswordInHistory(password);
 }
 
 // COPY PASSWORD TO CLIPBOARD
 function copyPassword() {
-    if (!passwordResult.value) return;
+  if (!passwordResult.value) return;
 
-    navigator.clipboard.writeText(passwordResult.value);
+  navigator.clipboard.writeText(passwordResult.value);
 
-    copyBtn.textContent = "Copied!";
+  copyBtn.textContent = "Copied!";
 
-    setTimeout(() => {
-        copyBtn.textContent = "Copy";
-    }, 1000);
+  setTimeout(() => {
+    copyBtn.textContent = "Copy";
+  }, 1000);
+}
+
+// PASSWORD HISTORY //
+
+function openModal() {
+    modal.style.display = "flex";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+}
+
+function saveHistory() {
+  localStorage.setItem(
+    "passwordHistory",
+    JSON.stringify(passwordHistory)
+  );
+}
+
+function renderHistory() {
+  historyList.innerHTML = "";
+
+  if (passwordHistory.length === 0) {
+    emptyHistory.style.display = "block";
+    return;
+  }
+
+  emptyHistory.style.display = "none";
+
+  passwordHistory.forEach((password, index) => {
+    const div = document.createElement("div");
+    div.className = "historyPass";
+
+    const p = document.createElement("p");
+    p.textContent = password;
+
+    const del = document.createElement("span");
+    del.textContent = "🗑️";
+
+    p.addEventListener("click", () => {
+      navigator.clipboard.writeText(password);
+
+      p.textContent = "Copied!";
+
+      setTimeout(() => {
+        p.textContent = password;
+      }, 1000);
+    });
+
+    del.addEventListener("click", () => {
+      deletePassword(index);
+    });
+
+    div.appendChild(p);
+    div.appendChild(del);
+    historyList.appendChild(div);
+  });
+}
+
+function showPasswordInHistory(password){
+  passwordHistory.unshift(password);
+
+  saveHistory();
+  renderHistory();
+}
+
+function deletePassword(index){
+  passwordHistory.splice(index, 1);
+
+  saveHistory();
+  renderHistory();
 }

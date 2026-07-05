@@ -1,65 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Password Generator</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="shortcut icon"
+            href="./IMG/favicon.png"
+            type="image/x-icon"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="./IMG/favicon.png" type="image/x-icon">
-</head>
+    <body>
+        
+        <div class="container">
+            <h1>Random Password Generator</h1>
+            <p>
+                Generate strong, random, and unique passwords with the click of a button
+            </p>
 
-<body>
-    <div class="container">
-        <h1>Random Password Generator</h1>
-        <p>
-            Generate strong, random, and unique passwords with the click of a button
-        </p>
+            <div class="strength" id="strengthBox">
+                <div class="strengthDiv">
+                    <div id="strengthImg"></div>
+                    <h2 id="strengthText"></h2>
+                </div>
+            </div>
 
-        <div class="strength" id="strengthBox">
-            <div class="strengthDiv">
-                <div id="strengthImg"></div>
-                <h2 id="strengthText"></h2>
+            <div class="passConfig">
+                <input
+                    class="inputValue"
+                    type="number"
+                    min="1"
+                    value="1"
+                    id="passLength"
+                />
+                <input
+                    class="resultInput"
+                    type="text"
+                    readonly
+                    id="passwordResult"
+                    placeholder="Generated password..."
+                />
+                <button
+                    class="generateBtn"
+                    id="generateBtn"
+                    onclick="showPassword()"
+                >
+                    Generate
+                </button>
+
+                <button class="copyBtn" id="copyBtn" onclick="copyPassword()">
+                    Copy
+                </button>
+            </div>
+
+            <div class="passSettings">
+                <div class="checkboxes">
+                    <input
+                        type="checkbox"
+                        class="checkbox box"
+                        id="uppercase"
+                    />
+                    <label for="uppercase">A - Z</label>
+                </div>
+
+                <div class="checkboxes">
+                    <input
+                        type="checkbox"
+                        class="checkbox box"
+                        id="lowercase"
+                    />
+                    <label for="lowercase">a - z</label>
+                </div>
+
+                <div class="checkboxes">
+                    <input type="checkbox" class="checkbox box" id="numbers" />
+                    <label for="numbers">0 - 9</label>
+                </div>
+
+                <div class="checkboxes">
+                    <input
+                        class="symbolsInput"
+                        type="text"
+                        id="symbolsInput"
+                        placeholder="Symbols..."
+                    />
+                </div>
+
+                <div class="checkboxes">
+                    <button class="historyBtn" onclick="openModal()">Password history</button>
+                </div>
+
             </div>
         </div>
 
-        <div class="passConfig">
-            <input class="inputValue" type="number" min="1" value="1" id="passLength">
-            <input class="resultInput" type="text" readonly id="passwordResult" placeholder="Generated password...">
-            <button class="generateBtn" id="generateBtn" onclick="showPassword()">
-                Generate
-            </button>
-            <button class="copyBtn" id="copyBtn" onclick="copyPassword()">
-                Copy
-            </button>
-        </div>
 
-        <div class="passSettings">
-            <div class="checkboxes">
-                <input type="checkbox" class="checkbox box" id="uppercase">
-                <label for="uppercase">A - Z</label>
-            </div>
+        <div id="historyModal" class="modal">
+            <div class="modal-content">
 
-            <div class="checkboxes">
-                <input type="checkbox" class="checkbox box" id="lowercase">
-                <label for="lowercase">a - z</label>
-            </div>
+                <div class="niga">
+                    <h2>Password History</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
 
-            <div class="checkboxes">
-                <input type="checkbox" class="checkbox box" id="numbers">
-                <label for="numbers">0 - 9</label>
-            </div>
+                <p>Click on a password to copy it</p>
+                <hr>
 
-            <div class="checkboxes">
-                <input class="symbolsInput" type="text" id="symbolsInput" placeholder="Symbols...">
+                <h1 id="emptyHistory">Nothing here</h1>
+
+                <ul id="historyList">
+                    <!-- PASSWORDS -->
+                </ul>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
-    <script src="script.js"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>
