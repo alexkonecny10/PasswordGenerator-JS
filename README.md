@@ -32,25 +32,6 @@ A modern and responsive password generator built with **HTML**, **CSS**, and **J
 * JavaScript
 * Google Fonts
 
-## 📂 Project Structure
-
-```text
-password-generator/
-│
-├── index.html
-├── style.css
-├── script.js
-│
-└── IMG/
-    ├── bg.png
-    ├── favicon.png
-    ├── weak.png
-    ├── medium.png
-    ├── good.png
-    ├── strong.png
-    └── screenshot.png
-```
-
 ## 🚀 Getting Started
 
 ### Clone the Repository
@@ -64,17 +45,6 @@ git clone https://github.com/alexkonecny10/PasswordGenerator-JS.git
 Navigate to the project folder and open `index.html` in your browser.
 
 No installation or dependencies are required.
-
-## 📖 Usage
-
-1. Enter the desired password length.
-2. Select one or more character types:
-   * Uppercase Letters
-   * Lowercase Letters
-   * Numbers
-3. Optionally add custom symbols.
-4. Click **Generate**.
-5. Click **Copy** to copy the generated password to your clipboard.
 
 ## 🔒 Password Strength Levels
 
@@ -94,14 +64,3 @@ The application is optimized for:
 * Desktop
 * Tablet
 * Mobile devices
-
-## ⚠️ Notes
-
-* At least one character type must be selected before generating a password.
-* Password length must be greater than 0.
-* Passwords are generated randomly from the selected character sets.
-
-## 🔧 Future Improvements
-
-* Dark mode
-* Password history
