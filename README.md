@@ -12,6 +12,7 @@ A modern and responsive password generator built with **HTML**, **CSS**, and **J
 * Add custom symbols
 * Password strength indicator
 * One-click copy to clipboard
+* Password history
 * Fully responsive design
 * Clean and user-friendly interface
 
